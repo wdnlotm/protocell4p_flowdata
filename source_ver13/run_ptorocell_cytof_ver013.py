@@ -13,9 +13,16 @@ today = datetime.date.today()
 global seed_numb
 seed_numb = 123
 
-pt_numb = 10
+## Protype counts. usually = cluster count
+pt_numb = 10 
+
+## hidden layer dimension
+h_dime = 16
+
+## latent space dimension
 z_dime = 8
 
+#########  Data split, [split_1: train, split_2:val, split_3:test]
 split_1 = round(0.62, 4)
 split_2 = round( (1-split_1)/2, 5)
 split_3 = round(1 - split_1 - split_2, 6)
@@ -25,7 +32,8 @@ split_ratio_input = [split_1, split_2, split_3]
 log_file_name = 'log_' + str(today) + '_' + str(current_time) + "_" + str(seed_numb) + ".txt"
 print(log_file_name)
 
-data_folder_name = ''
+####### Data folder
+data_folder_name = 'bcell_50mil'
 data_loc_str = '../data/'+ data_folder_name
 
 exp_string1 = 'Prt_cytof_'+ data_folder_name 
@@ -33,6 +41,7 @@ exp_string2 = '_' + str(pt_numb) + 'pt_' + 'zd'+str(z_dime)+'_' + str(int(round(
 exp_string =  exp_string1 + exp_string2
 print(exp_string)
 
+### loss function weight. lambda5, 6 are related to ct_loss
 lamb = 1.0
 
 #lambda_5 and lambda_6 are related to load_ct
@@ -42,7 +51,7 @@ args = arguments_for_protocell(data = "cytof",
                                seed = seed_numb,
                                exp_str = exp_string,
                                log_file_name = log_file_name,
-                               h_dim = 16,
+                               h_dim = h_dime,
                                z_dim = z_dime,
                                n_layers = 2, 
                                n_proto = pt_numb,
