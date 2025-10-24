@@ -9,6 +9,9 @@
 #SBATCH --time=72:00:00
 #SBATCH -A iprime
 
-module load apptainer
-containerloc=/scratch/mbt8hz/imageD/Pytorch_2.1/pytorch_2.1.2-cuda11.8-cudnn8-runtime3.sif
-apptainer exec --nv $containerloc python run_ptorocell_cytof_ver013.py
+module load gcc openmpi python
+source your python virtual environment
+cd your source directory
+python python run_ptorocell_cytof_ver013.py
+
+# sbatch run_protocell.slurm
